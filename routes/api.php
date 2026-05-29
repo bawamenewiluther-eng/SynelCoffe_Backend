@@ -11,39 +11,13 @@ use App\Models\User;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/version-test', function () {
-    return [
-        'version' => 'LUTHER_TEST_123456789',
-        'time' => now(),
-    ];
-});
-Route::get('/env-test', function () {
-    return [
-        'SESSION_SAME_SITE_ENV' => env('SESSION_SAME_SITE'),
+Route::get('/clear-all-cache', function () {
 
-        'config_same_site' => config('session.same_site'),
-
-        'hardcoded_test' => 'VERSION_999'
-    ];
-});
-Route::get('/clear-cache', function () {
     Artisan::call('optimize:clear');
 
     return [
         'message' => 'cache cleared'
     ];
-});
-
-Route::get('/debug-session', function () {
-
-    return [
-
-        'same_site_config' => config('session.same_site'),
-
-        'session_config_file_test' => 'AKU_EDIT_LANGSUNG',
-
-    ];
-
 });
 Route::post(
     '/ai-chat',

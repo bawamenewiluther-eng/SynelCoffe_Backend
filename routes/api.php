@@ -11,6 +11,11 @@ use App\Models\User;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('/debug-cookie', function () {
+    return response()->json([
+        'same_site' => config('session.same_site'),
+    ]);
+});
 Route::get('/debug-session', function () {
 
     return [

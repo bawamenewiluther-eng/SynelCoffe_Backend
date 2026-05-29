@@ -12,11 +12,12 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/debug-db', function () {
+
     return [
         'database' => DB::connection()->getDatabaseName(),
-        'menus_count' => DB::table('menus')->count(),
-        'menus' => DB::table('menus')->get(),
+        'tables' => DB::select('SHOW TABLES'),
     ];
+
 });
 Route::post(
     '/ai-chat',

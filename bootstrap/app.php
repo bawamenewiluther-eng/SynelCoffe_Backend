@@ -25,5 +25,17 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })
+    ->withMiddleware(function (Middleware $middleware) {
+
+    $middleware->validateCsrfTokens(
+        except: [
+            'login',
+            'register',
+        ]
+    );
+
+    $middleware->statefulApi();
+
+})
     ->create();
 

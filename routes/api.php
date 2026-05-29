@@ -34,22 +34,16 @@ Route::get('/clear-cache', function () {
     ];
 });
 
-Route::get('/env-test', function () {
-    return [
-        'SESSION_SAME_SITE_ENV' => env('SESSION_SAME_SITE'),
-        'SESSION_SECURE_COOKIE_ENV' => env('SESSION_SECURE_COOKIE'),
-        'config_same_site' => config('session.same_site'),
-        'config_secure' => config('session.secure'),
-    ];
-});
-Route::get('/env-test', function () {
-    return [
-        'SESSION_SAME_SITE_ENV' => env('SESSION_SAME_SITE'),
-        'SESSION_SECURE_COOKIE_ENV' => env('SESSION_SECURE_COOKIE'),
+Route::get('/debug-session', function () {
 
-        'config_same_site' => config('session.same_site'),
-        'config_secure' => config('session.secure'),
+    return [
+
+        'same_site_config' => config('session.same_site'),
+
+        'session_config_file_test' => 'AKU_EDIT_LANGSUNG',
+
     ];
+
 });
 Route::post(
     '/ai-chat',

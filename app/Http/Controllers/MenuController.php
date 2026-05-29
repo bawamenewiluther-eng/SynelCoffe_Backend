@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Menu;
+use App\Models\menu;
 
 use Illuminate\Http\Request;
 

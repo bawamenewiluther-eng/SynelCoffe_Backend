@@ -42,19 +42,21 @@ class AuthController extends Controller
 
                 ]);
             }
-        public function login(Request $request)
-        {
-            if (!Auth::attempt($request->only('email', 'password'))) {
-                return response()->json(['message' => 'Login gagal'], 401);
-            }
+       public function login(Request $request)
+            {
+                if (!Auth::attempt($request->only('email', 'password'))) {
+                    return response()->json(['message' => 'Login gagal'], 401);
+                }
 
-            $request->session()->regenerate(); // WAJIB
+                $request->session()->regenerate();
 
-            return response()->json([
-                'user' => Auth::user()
-            ]);
-        }
-            public function logout(Request $request)
+                return response()->json([
+                    'auth_check' => Auth::check(),
+                    'user' => Auth::user(),
+                    'session_id' => session()->getId(),
+                    'session_data' => session()->all(),
+                ]);
+            }            public function logout(Request $request)
         {
             Auth::logout();
             $request->session()->invalidate();

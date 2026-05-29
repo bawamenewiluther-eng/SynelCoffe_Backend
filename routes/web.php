@@ -7,11 +7,12 @@ use App\Http\Controllers\Auth\GoogleController;
 
 use Illuminate\Http\Request;
 
-Route::post('/csrf-debug', function (Request $request) {
+Route::get('/csrf-debug', function () {
     return [
-        'session_token' => $request->session()->token(),
-        'header_token' => $request->header('X-XSRF-TOKEN'),
-        'cookie_token' => $request->cookie('XSRF-TOKEN'),
+        'session_driver' => config('session.driver'),
+        'session_domain' => config('session.domain'),
+        'same_site' => config('session.same_site'),
+        'secure' => config('session.secure'),
     ];
 });
 Route::get('/sanctum-debug', function () {

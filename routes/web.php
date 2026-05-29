@@ -7,10 +7,11 @@ use App\Http\Controllers\Auth\GoogleController;
 
 use Illuminate\Http\Request;
 
-Route::post('/csrf-debug', function (\Illuminate\Http\Request $request) {
+Route::get('/web-user', function (Request $request) {
     return response()->json([
-        'session_token' => csrf_token(),
-        'header_token' => $request->header('X-XSRF-TOKEN'),
+        'auth_check' => Auth::check(),
+        'user' => Auth::user(),
+        'request_user' => $request->user(),
         'session_id' => session()->getId(),
     ]);
 });

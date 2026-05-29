@@ -4,9 +4,7 @@ use Laravel\Sanctum\Sanctum;
 
 return [
 
-'stateful' => [
-  'localhost:5173',
-],
+'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', 'localhost:5173')),
 
 
     'guard' => ['web'],

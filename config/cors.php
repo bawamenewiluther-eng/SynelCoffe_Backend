@@ -6,7 +6,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['synel-coffe.vercel.app'],
+    'allowed_origins' => ['https://synel-coffe.vercel.app',],
 
     'allowed_origins_patterns' => [],
 

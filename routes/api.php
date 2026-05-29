@@ -11,13 +11,16 @@ use App\Models\User;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('/clear-all-cache', function () {
-
-    Artisan::call('optimize:clear');
+Route::get('/debug-session', function () {
 
     return [
-        'message' => 'cache cleared'
+
+        'same_site_config' => config('session.same_site'),
+
+        'session_config_file_test' => 'AKU_EDIT_LANGSUNG',
+
     ];
+
 });
 Route::post(
     '/ai-chat',

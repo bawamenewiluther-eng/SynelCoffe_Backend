@@ -18,6 +18,15 @@ Route::get('/env-test', function () {
         'config_secure' => config('session.secure'),
     ];
 });
+Route::get('/env-test', function () {
+    return [
+        'SESSION_SAME_SITE_ENV' => env('SESSION_SAME_SITE'),
+        'SESSION_SECURE_COOKIE_ENV' => env('SESSION_SECURE_COOKIE'),
+
+        'config_same_site' => config('session.same_site'),
+        'config_secure' => config('session.secure'),
+    ];
+});
 Route::post(
     '/ai-chat',
     [PaymentController::class,

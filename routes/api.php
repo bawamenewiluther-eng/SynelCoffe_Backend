@@ -10,11 +10,12 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use App\Http\Controllers\PaymentController;
 
-Route::get('/debug-sanctum', function () {
+Route::get('/debug-session', function () {
     return [
-        'stateful' => config('sanctum.stateful'),
-        'session_domain' => config('session.domain'),
-        'app_url' => config('app.url'),
+        'same_site' => config('session.same_site'),
+        'secure' => config('session.secure'),
+        'driver' => config('session.driver'),
+        'domain' => config('session.domain'),
     ];
 });
 Route::post(

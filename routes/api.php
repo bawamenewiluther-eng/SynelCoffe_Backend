@@ -11,6 +11,12 @@ use App\Models\User;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('/version-test', function () {
+    return [
+        'version' => 'LUTHER_TEST_123456789',
+        'time' => now(),
+    ];
+});
 Route::get('/env-test', function () {
     return [
         'SESSION_SAME_SITE_ENV' => env('SESSION_SAME_SITE'),

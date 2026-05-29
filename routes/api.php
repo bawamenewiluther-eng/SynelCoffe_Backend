@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Http\Controllers\PaymentController;
-use Illuminate\Support\Facades\DB;
 
-Route::get('/debug-db', function () {
+Route::get('/debug-sanctum', function () {
     return [
-        'database' => DB::connection()->getDatabaseName(),
-        'databases' => DB::select('SHOW DATABASES'),
+        'stateful' => config('sanctum.stateful'),
+        'session_domain' => config('session.domain'),
+        'app_url' => config('app.url'),
     ];
 });
 Route::post(

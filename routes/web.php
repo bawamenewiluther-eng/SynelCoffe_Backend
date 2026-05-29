@@ -5,6 +5,15 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 
+use Illuminate\Http\Request;
+
+Route::post('/csrf-debug', function (Request $request) {
+    return [
+        'session_token' => $request->session()->token(),
+        'header_token' => $request->header('X-XSRF-TOKEN'),
+        'cookie_token' => $request->cookie('XSRF-TOKEN'),
+    ];
+});
 Route::get('/sanctum-debug', function () {
     return [
         'stateful' => config('sanctum.stateful'),

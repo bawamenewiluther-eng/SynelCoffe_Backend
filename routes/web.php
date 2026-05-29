@@ -7,6 +7,14 @@ use App\Http\Controllers\Auth\GoogleController;
 
 use Illuminate\Http\Request;
 
+Route::get('/check-login', function (Request $request) {
+
+    return response()->json([
+        'auth_check' => Auth::check(),
+        'user' => Auth::user(),
+    ]);
+
+});
 Route::get('/web-user', function (Request $request) {
     return response()->json([
         'auth_check' => Auth::check(),

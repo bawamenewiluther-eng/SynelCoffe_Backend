@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+
+    return [
+        'message' => 'cache cleared'
+    ];
+});
 
 Route::get('/env-test', function () {
     return [

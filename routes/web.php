@@ -7,12 +7,12 @@ use App\Http\Controllers\Auth\GoogleController;
 
 use Illuminate\Http\Request;
 
-Route::get('/csrf-debug', function () {
-    return [
+Route::post('/csrf-debug', function (\Illuminate\Http\Request $request) {
+    return response()->json([
+        'session_token' => csrf_token(),
+        'header_token' => $request->header('X-XSRF-TOKEN'),
         'session_id' => session()->getId(),
-        'csrf_token' => csrf_token(),
-        'cookie_name' => config('session.cookie'),
-    ];
+    ]);
 });
 Route::get(
     '/auth/google/redirect',

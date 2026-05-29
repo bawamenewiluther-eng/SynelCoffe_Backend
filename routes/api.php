@@ -11,6 +11,14 @@ use App\Models\User;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('/guard-debug', function (Request $request) {
+    return response()->json([
+        'auth_check' => Auth::check(),
+        'user' => Auth::user(),
+        'request_user' => $request->user(),
+        'session_id' => session()->getId(),
+    ]);
+});
 Route::post(
     '/ai-chat',
     [PaymentController::class,

@@ -11,6 +11,15 @@ use App\Models\User;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('/env-test', function () {
+    return [
+        'SESSION_SAME_SITE_ENV' => env('SESSION_SAME_SITE'),
+
+        'config_same_site' => config('session.same_site'),
+
+        'hardcoded_test' => 'VERSION_999'
+    ];
+});
 Route::get('/clear-cache', function () {
     Artisan::call('optimize:clear');
 

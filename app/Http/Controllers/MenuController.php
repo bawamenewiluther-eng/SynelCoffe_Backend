@@ -16,7 +16,7 @@ class MenuController extends Controller
 
     $category = $request->category;
 
-    $menus = Menu::query()
+    $menus = menu::query()
 
         ->when($search, function ($query) use ($search) {
 

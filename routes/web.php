@@ -5,6 +5,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\GoogleController;
 
+Route::get('/sanctum-debug', function () {
+    return [
+        'stateful' => config('sanctum.stateful'),
+    ];
+});
 Route::get('/session-driver', function () {
     return [
         'driver' => config('session.driver'),

@@ -12,12 +12,10 @@ use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/debug-db', function () {
-
     return [
         'database' => DB::connection()->getDatabaseName(),
-        'tables' => DB::select('SHOW TABLES'),
+        'databases' => DB::select('SHOW DATABASES'),
     ];
-
 });
 Route::post(
     '/ai-chat',
@@ -187,7 +185,8 @@ Route::post('/reset-password', function (Request $request) {
 
     return $status === Password::PASSWORD_RESET
 
-        ? response()->json([
+        
+? response()->json([
 
             'message' => 'Password berhasil direset'
 

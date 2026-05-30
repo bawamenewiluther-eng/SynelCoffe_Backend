@@ -22,6 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             '/api/save-order', 
             'midtrans/callback',
             '/api/my-orders',
+            '/api/orders',
+             '/api/orders/update-status/*'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

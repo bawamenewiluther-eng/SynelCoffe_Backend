@@ -21,9 +21,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Gunakan /api/ untuk rute yang memang ada di api.php
         '/api/login', 
         '/api/register',
-        '/api/logout',
+        '/logout',
         '/api/forgot-password',
-        '/api/reset-password',
+        '/reset-password',
         
         '/api/ai-chat',
         '/api/checkout',

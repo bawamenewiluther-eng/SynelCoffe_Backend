@@ -129,14 +129,14 @@ return [
    'domain' => env('SESSION_DOMAIN', null), 
 
 
-    'secure' => env('SESSION_SECURE_COOKIE', true),
+'   secure' => true,
 
 
     'http_only' => env('SESSION_HTTP_ONLY', true),
 
 
 
-    'same_site' => env('SESSION_SAME_SITE', 'none'),
+    'same_site' => 'none',
 
 
     'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),

@@ -28,10 +28,8 @@ Route::post(
 Route::post(
 
     '/my-orders',
-
     [PaymentController::class,
     'myOrders']
-
 );
 Route::post(
 
@@ -110,19 +108,7 @@ Route::middleware([
     );
 
 });
-Route::post('/forgot-password', function (Request $request) {
-
-    $request->validate([
-
-        'email' => 'required|email'
-
-    ]);
-
-    $status = Password::sendResetLink(
-
-        $request->only('email')
-
-    );
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink']);
 
     return $status === Password::RESET_LINK_SENT
 

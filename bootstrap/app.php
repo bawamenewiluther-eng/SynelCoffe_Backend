@@ -20,8 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         '/login',
         '/register',
         '/logout',
-        '/forgot-password',
-        '/reset-password',
+        '/api/forgot-password',
+            '/api/reset-password',
 
         // Rute AI & Chat
         '/api/ai-chat',

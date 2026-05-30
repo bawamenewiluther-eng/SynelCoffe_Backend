@@ -2,11 +2,10 @@
 
 return [
 
-'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'register'],
+'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'register', 'user'],
 
 'allowed_methods' => ['*'],
 
-// Tulis langsung domain Vercel kamu di sini (TANPA garis miring di akhir)
 'allowed_origins' => ['https://synel-coffe.vercel.app'], 
 
 'allowed_origins_patterns' => [],
@@ -20,3 +19,5 @@ return [
 'supports_credentials' => true, // INI WAJIB TRUE
 
 ];
+
+

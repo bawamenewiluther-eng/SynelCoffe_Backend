@@ -11,8 +11,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->statefulApi(); // <--- WAJIB TAMBAHKAN INI
-    })
+            $middleware->statefulApi();
+            
+            // Tambahkan baris ini untuk memastikan CORS diproses lebih dulu
+            $middleware->validateCsrfTokens(except: [
+                '/login',
+                '/register',
+            ]);
+        })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

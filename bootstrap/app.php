@@ -19,8 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
     $middleware->validateCsrfTokens(except: [
         // Gunakan /api/ untuk rute yang memang ada di api.php
-        '/api/login', 
-        '/api/register',
+        '/login', 
+        '/register',
         '/logout',
         '/forgot-password',
         '/reset-password',

@@ -17,10 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             '/login',
             '/register',
             '/logout',
-            '/api/ai-chat',    // Sesuaikan dengan path rute AI kamu
-            '/api/checkout',   // Sesuaikan dengan path rute Checkout kamu
-            '/api/save-order', // Agar simpan order juga lancar
-            'midtrans/callback' // WAJIB: agar Midtrans bisa kirim notifikasi ke backend
+            '/api/ai-chat', 
+            '/api/checkout',  
+            '/api/save-order', 
+            'midtrans/callback',
+            '/api/my-orders',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

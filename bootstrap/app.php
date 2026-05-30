@@ -10,26 +10,32 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware) {
-        $middleware->statefulApi();
-        
-        $middleware->validateCsrfTokens(except: [
-            '/login',
-            '/register',
-            '/logout',
-            '/api/ai-chat', 
-            '/api/checkout',  
-            '/api/save-order', 
-            'midtrans/callback',
-            '/api/my-orders',
-            '/api/orders',
-            '/api/checkout',
-            '/api/forgot-password',
-            '/api/reset-password',
-             '/api/menus',
-             '/api/orders/update-status/*'
-        ]);
-    })
+  ->withMiddleware(function (Middleware $middleware) {
+    $middleware->statefulApi();
+    
+    $middleware->validateCsrfTokens(except: [
+        // Rute Auth Bawaan
+        '/login',
+        '/register',
+        '/logout',
+        '/forgot-password',
+        '/reset-password',
+
+        // Rute AI & Chat
+        '/api/ai-chat',
+
+        // Rute Payment & Orders (User & Admin)
+        '/api/checkout',
+        '/api/save-order',
+        '/api/my-orders',
+        '/api/orders/update-status/*', // Wildcard untuk ID pesanan
+
+        // Rute Manajemen Menu (Admin)
+        '/api/menus',               // Untuk POST (tambah menu)
+        '/api/menus/*',             // Untuk PUT & DELETE (update/hapus menu)
+        '/api/menus/upload-image',
+    ]);
+})
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

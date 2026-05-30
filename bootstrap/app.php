@@ -23,6 +23,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'midtrans/callback',
             '/api/my-orders',
             '/api/orders',
+            '/api/checkout',
+            '/api/forgot-password',
+            '/api/reset-password',
+             '/api/menus',
              '/api/orders/update-status/*'
         ]);
     })

@@ -19,6 +19,7 @@ Route::get('/guard-debug', function (Request $request) {
         'session_id' => session()->getId(),
     ]);
 });
+Route::post('/orders/reset-queue', [OrderController::class, 'resetQueue']);
 Route::post(
     '/ai-chat',
     [PaymentController::class,

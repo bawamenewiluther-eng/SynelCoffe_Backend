@@ -10,7 +10,6 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Http;
 use App\Models\OrderItem;
 use App\Models\Menu;
-use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -137,111 +136,60 @@ class PaymentController extends Controller
         ]);
 
     }
-            public function saveOrder(Request $request)
-        {
-            $lastQueue = Order::max(
+         public function saveOrder(Request $request)
+{
+    try {
+        // 1. Logika Reset Harian: 
+        // Cari queue_number tertinggi yang dibuat pada TANGGAL HARI INI saja
+        $lastQueue = Order::whereDate('created_at', \Carbon\Carbon::today())
+                          ->max('queue_number');
 
-                'queue_number'
+        // Jika ada pesanan hari ini, tambah 1. Jika belum ada (pesanan pertama), mulai dari 1.
+        $queueNumber = $lastQueue ? $lastQueue + 1 : 1;
 
-            );
+        // 2. Simpan Data Order Utama
+        $order = Order::create([
+            'customer_name'     => $request->customer_name,
+            'customer_email'    => $request->customer_email,
+            'payment_method'    => $request->payment_method,
+            'payment_status'    => 'paid',
+            'order_status'      => 'pending',
+            'queue_number'      => $queueNumber,
+            'midtrans_order_id' => $request->midtrans_order_id,
+            'transaction_id'    => $request->transaction_id,
+            'total_price'       => $request->total_price,
+            'paid_at'           => now()
+        ]);
 
-            $queueNumber =
-
-                $lastQueue
-                ? $lastQueue + 1
-                : 1;
-            // ======================
-            // SAVE ORDER
-            // ======================
-
-            $order = Order::create([
-
-                'customer_name' =>
-
-                    $request->customer_name,
-
-                'customer_email' =>
-
-                    $request->customer_email,
-
-                'payment_method' =>
-
-                    $request->payment_method,
-
-                'payment_status' =>
-
-                    'paid',
-                 
-                'order_status' =>
-
-                    'pending',
-                'queue_number' =>
-
-                   $queueNumber,
-                'midtrans_order_id' =>
-
-                    $request->midtrans_order_id,
-
-                'transaction_id' =>
-
-                    $request->transaction_id,
-
-                'total_price' =>
-
-                    $request->total_price,
-
-                'paid_at' => now()
-
-            ]);
-
-            // ======================
-            // SAVE ITEMS
-            // ======================
-
-            foreach (
-
-                $request->items
-                as $item
-
-            ) {
-
+        // 3. Simpan Detail Item Pesanan (Looping)
+        if ($request->has('items')) {
+            foreach ($request->items as $item) {
                 OrderItem::create([
-
-                    'order_id' =>
-
-                        $order->id,
-
-                    'menu_name' =>
-
-                        $item['name'],
-
-                    'price' =>
-
-                        $item['price'],
-
-                    'quantity' =>
-
-                        $item['quantity'],
-
-                    'subtotal' =>
-
-                        $item['price']
-                        *
-                        $item['quantity']
-
+                    'order_id'  => $order->id,
+                    'menu_name' => $item['name'],
+                    'price'     => $item['price'],
+                    'quantity'  => $item['quantity'],
+                    'subtotal'  => $item['price'] * $item['quantity']
                 ]);
-
             }
-
-            return response()->json([
-
-                'message' =>
-
-                    'Order berhasil disimpan'
-
-            ]);
-
         }
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'Order berhasil disimpan',
+            'queue'   => 'O' . $queueNumber // Mengembalikan nomor antrian ke frontend jika perlu
+        ], 201);
+
+    } catch (\Exception $e) {
+        // Log error jika terjadi kegagalan sistem
+        \Log::error("Save Order Error: " . $e->getMessage());
+        
+        return response()->json([
+            'status'  => 'error',
+            'message' => 'Gagal menyimpan order: ' . $e->getMessage()
+        ], 500);
+    }
+}
         public function getOrders()
             {
 

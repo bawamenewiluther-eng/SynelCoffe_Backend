@@ -11,15 +11,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-            $middleware->statefulApi();
-            
-            // Tambahkan baris ini untuk memastikan CORS diproses lebih dulu
-            $middleware->validateCsrfTokens(except: [
-                '/login',
-                '/register',
-                '/logout',
-            ]);
-        })
+        $middleware->statefulApi();
+        
+        $middleware->validateCsrfTokens(except: [
+            '/login',
+            '/register',
+            '/logout',
+            '/api/ai-chat',    // Sesuaikan dengan path rute AI kamu
+            '/api/checkout',   // Sesuaikan dengan path rute Checkout kamu
+            '/api/save-order', // Agar simpan order juga lancar
+            'midtrans/callback' // WAJIB: agar Midtrans bisa kirim notifikasi ke backend
+        ]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

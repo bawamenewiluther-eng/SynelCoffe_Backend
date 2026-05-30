@@ -33,14 +33,13 @@ class ResetPasswordNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-public function toMail($notifiable)
-{
-
-    $url =
-        'http://localhost:5173/reset-password?token='
-        . $this->token
-        . '&email='
-        . urlencode($notifiable->email);
+    public function toMail($notifiable)
+    {
+        $url = env('FRONTEND_URL', 'https://synel-coffe.vercel.app')
+            . '/reset-password?token='
+            . $this->token
+            . '&email='
+            . urlencode($notifiable->email);
 
     return (new MailMessage)
 

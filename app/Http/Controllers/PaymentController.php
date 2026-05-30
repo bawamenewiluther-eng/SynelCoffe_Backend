@@ -9,7 +9,7 @@ use Midtrans\Snap;
 use App\Models\Order;
 use Illuminate\Support\Facades\Http;
 use App\Models\OrderItem;
-use App\Models\menu;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -385,10 +385,7 @@ public function aiChat(
 
             . env('OPENROUTER_API_KEY'),
 
-        'HTTP-Referer' =>
-
-            'http://localhost:5173',
-
+        'HTTP-Referer' =>env('FRONTEND_URL', 'https://synel-coffe.vercel.app'),
         'X-Title' =>
 
             'Synel Coffee'

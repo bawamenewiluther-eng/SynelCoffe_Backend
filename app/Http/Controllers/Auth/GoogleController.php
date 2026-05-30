@@ -84,10 +84,8 @@ public function callback()
         ->createToken('auth_token')
         ->plainTextToken;
 
-    return redirect(
-
-        'http://localhost:5173/auth-success?token=' . $token
-
-    );
+        return redirect(
+            env('FRONTEND_URL', 'https://synel-coffe.vercel.app') . '/auth-success?token=' . $token
+        );
 }
 }

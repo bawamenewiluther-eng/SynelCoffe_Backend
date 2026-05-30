@@ -22,14 +22,14 @@ class AppServiceProvider extends ServiceProvider
     {
         ResetPassword::createUrlUsing(
 
-    function ($user, string $token) {
-
-        return 'http://localhost:5173/reset-password?token='
-            . $token
-            . '&email='
-            . urlencode($user->email);
-
-                }
+        function ($user, string $token) {
+            // Mengambil URL dari config/env agar tidak perlu ganti kode lagi nanti
+            return env('FRONTEND_URL', 'https://synel-coffe.vercel.app')
+                . '/reset-password?token='
+                . $token
+                . '&email='
+                . urlencode($user->email);
+        }
 
             );
     }

@@ -22,7 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         '/api/login', 
         '/api/register',
         '/logout',
-        '/api/forgot-password',
+        '/forgot-password',
         '/reset-password',
         
         '/api/ai-chat',

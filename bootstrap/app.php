@@ -10,31 +10,29 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-  ->withMiddleware(function (Middleware $middleware) {
+->withMiddleware(function (Middleware $middleware) {
     $middleware->statefulApi();
+    
     $middleware->alias([
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ]);
+
     $middleware->validateCsrfTokens(except: [
-        // Rute Auth Bawaan
-        '/login',
-        '/register',
-        '/logout',
+        // Gunakan /api/ untuk rute yang memang ada di api.php
+        '/api/login', 
+        '/api/register',
+        '/api/logout',
         '/api/forgot-password',
-            '/api/reset-password',
-
-        // Rute AI & Chat
+        '/api/reset-password',
+        
         '/api/ai-chat',
-
-        // Rute Payment & Orders (User & Admin)
         '/api/checkout',
         '/api/save-order',
         '/api/my-orders',
-        '/api/orders/update-status/*', // Wildcard untuk ID pesanan
+        '/api/orders/update-status/*',
 
-        // Rute Manajemen Menu (Admin)
-        '/api/menus',               // Untuk POST (tambah menu)
-        '/api/menus/*',             // Untuk PUT & DELETE (update/hapus menu)
+        '/api/menus',
+        '/api/menus/*',
         '/api/menus/upload-image',
     ]);
 })
